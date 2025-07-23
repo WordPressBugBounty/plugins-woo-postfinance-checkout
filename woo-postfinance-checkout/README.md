@@ -25,7 +25,7 @@ Support queries can be issued on the [PostFinance Checkout support site](https:/
 ____________________________________________________________________________
 | WooCommerce version    | Plugin major version   | Supported until        |
 |------------------------|------------------------|------------------------|
-| 8.x, 9.x, 10.x         | 3.x                    | Further notice         |
+| 8.x, 9.x               | 3.x                    | Further notice         |
 | 7.x                    | 2.x                    | Feb 2024               |
 ----------------------------------------------------------------------------
 

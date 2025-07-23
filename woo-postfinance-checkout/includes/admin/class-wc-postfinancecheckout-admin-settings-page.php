@@ -408,25 +408,6 @@ TEXT
 				'id' => 'reference_options',
 			),
 
-			array(
-				'title' => esc_html__( 'Virtual Order Status Options', 'woo-postfinancecheckout' ),
-				'type' => 'title',
-				'id' => 'order_status_options',
-			),
-
-			array(
-				'title' => esc_html__( 'Change Virtual Order Status On Completion', 'woo-postfinancecheckout' ),
-				'desc' => esc_html__( 'Enable this setting to automatically set order\'s status to "Completed" when they consist entirely out of virtual products and order\'s total is 0.', 'woo-postfinancecheckout' ),
-				'id' => WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_CHANGE_ORDER_STATUS,
-				'type' => 'checkbox',
-				'default' => 'yes',
-				'css' => 'min-width:300px;',
-			),
-
-			array(
-				'type' => 'sectionend',
-				'id' => 'order_status_options',
-			),
 		);
 
 		return apply_filters( 'postfinancecheckout_settings', $settings );
