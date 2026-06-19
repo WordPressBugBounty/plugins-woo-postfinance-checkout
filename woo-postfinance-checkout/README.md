@@ -7,14 +7,14 @@ This repository contains the PostFinance Checkout plugin that enables WooCommerc
 
 ## Requirements
 
-* [Wordpress](https://wordpress.org/) 6.x
+* [Wordpress](https://wordpress.org/) 7.1
 * [Woocommerce](https://woocommerce.com/) 8.x and 9.x
 * [PHP](http://php.net/) version supported by the Wordpress/Woocommerce version.
 * (For previous versions, see table below)
 
 ## Documentation
 
-* [Documentation](https://plugin-documentation.postfinance-checkout.ch/pfpayments/woocommerce/3.3.20/docs/en/documentation.html)
+* [Documentation](https://plugin-documentation.postfinance-checkout.ch/pfpayments/woocommerce/3.4.5/docs/en/documentation.html)
 
 ## Support
 
@@ -31,7 +31,7 @@ ____________________________________________________________________________
 
 ## License
 
-Please see the [license file](https://github.com/pfpayments/woocommerce/blob/3.3.20/LICENSE) for more information.
+Please see the [license file](https://github.com/pfpayments/woocommerce/blob/3.4.5/LICENSE) for more information.
 
 ## Privacy Policy
 
