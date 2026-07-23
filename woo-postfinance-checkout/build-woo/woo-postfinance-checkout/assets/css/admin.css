@@ -1,6 +1,6 @@
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -9,7 +9,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 /* Icons for status */
@@ -159,6 +159,21 @@
 	float: left;
 }
 
+.postfinancecheckout-status-mapping-header {
+	display: flex;
+	font-weight: 600;
+	font-size: 1.3em;
+	margin: 1em 0;
+	color: #1d2327;
+}
+.postfinancecheckout-status-mapping-col-left {
+	width: 200px;
+	padding-right: 24px;
+}
+.postfinancecheckout-status-mapping-col-right {
+	padding: 0 10px;
+}
+
 .postfinancecheckout-refund-state-pending {
 	background-color: rgba(255, 186, 0, 0.55);
 }
@@ -166,3 +181,4 @@
 .postfinancecheckout-refund-state-failue {
 	background-color: rgba(170, 0, 0, 0.55);
 }
+

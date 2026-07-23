@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -30,7 +30,12 @@ class WC_PostFinanceCheckout_Webhook_Method_Configuration extends WC_PostFinance
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request request.
 	 */
 	public function process( WC_PostFinanceCheckout_Webhook_Request $request ) {
-		$payment_method_configuration_service = WC_PostFinanceCheckout_Service_Method_Configuration::instance();
-		$payment_method_configuration_service->synchronize();
+		wc_deprecated_function(
+            __METHOD__,
+            '3.0.12',
+            'WC_PostFinanceCheckout_Webhook_Method_Configuration_Strategy::process'
+        );
+		$strategy = new WC_PostFinanceCheckout_Webhook_Method_Configuration_Strategy();
+		$strategy->process( $request );
 	}
 }

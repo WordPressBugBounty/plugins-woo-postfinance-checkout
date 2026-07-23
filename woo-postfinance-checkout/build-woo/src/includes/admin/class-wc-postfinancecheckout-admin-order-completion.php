@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -92,8 +92,6 @@ class WC_PostFinanceCheckout_Admin_Order_Completion {
 	 * @throws Exception Exception.
 	 */
 	public static function execute_completion() {
-		ob_start();
-
 		check_ajax_referer( 'order-item', 'security' );
 
 		if ( ! current_user_can( 'edit_shop_orders' ) ) { // phpcs:ignore
@@ -165,7 +163,7 @@ class WC_PostFinanceCheckout_Admin_Order_Completion {
 			WC_PostFinanceCheckout_Helper::instance()->start_database_transaction();
 			$transaction_info = WC_PostFinanceCheckout_Entity_Transaction_Info::load_by_order_id( $order_id );
 			if ( ! $transaction_info->get_id() ) {
-				throw new Exception( __( 'Could not load corresponding transaction' ) );
+				throw new Exception( __( 'Could not load corresponding transaction', 'woo-postfinancecheckout' ) );
 			}
 
 			WC_PostFinanceCheckout_Helper::instance()->lock_by_transaction_id( $transaction_info->get_space_id(), $transaction_info->get_transaction_id() );

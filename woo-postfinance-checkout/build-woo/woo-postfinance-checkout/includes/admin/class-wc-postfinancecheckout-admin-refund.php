@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -103,8 +103,8 @@ class WC_PostFinanceCheckout_Admin_Refund {
 					$transaction_info->get_transaction_id()
 				);
 				if ( $existing_refund_job->get_id() > 0 ) {
-					printf( '<span class="postfinancecheckout-action-in-progress">%s</span>', esc_html( esc_html__( 'There is a refund in progress.', 'woo-postfinancecheckout' ) ) );
-					printf( '<button type="button" class="button postfinancecheckout-update-order">%s</button>', esc_html( esc_html__( 'Update', 'woo-postfinancecheckout' ) ) );
+					printf( '<span class="postfinancecheckout-action-in-progress">%s</span>', esc_html__( 'There is a refund in progress.', 'woo-postfinancecheckout' ) );
+					printf( '<button type="button" class="button postfinancecheckout-update-order">%s</button>', esc_html__( 'Update', 'woo-postfinancecheckout' ) );
 					printf( '<span id="postfinancecheckout-remove-refund" style="display:none;"></span>' );
 				}
 				printf( '<span id="postfinancecheckout-refund-restrictions" style="display:none;"></span>' );

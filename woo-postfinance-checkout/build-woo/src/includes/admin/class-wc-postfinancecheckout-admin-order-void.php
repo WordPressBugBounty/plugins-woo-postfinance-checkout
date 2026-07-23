@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -88,8 +88,6 @@ class WC_PostFinanceCheckout_Admin_Order_Void {
 	 * @throws Exception Exception.
 	 */
 	public static function execute_void() {
-		ob_start();
-
 		check_ajax_referer( 'order-item', 'security' );
 
 		if ( ! current_user_can( 'edit_shop_orders' ) ) { // phpcs:ignore

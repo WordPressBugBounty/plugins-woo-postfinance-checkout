@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -60,7 +60,7 @@ class WC_PostFinanceCheckout_Admin_Transaction {
 			: 'shop_order';
 		add_meta_box(
 			'woocommerce-order-postfinancecheckout-transaction',
-			__( 'PostFinance Checkout Transaction', 'woocommerce-postfinancecheckout' ),
+			__( 'PostFinance Checkout Transaction', 'woo-postfinancecheckout' ),
 			array(
 				__CLASS__,
 				'output',

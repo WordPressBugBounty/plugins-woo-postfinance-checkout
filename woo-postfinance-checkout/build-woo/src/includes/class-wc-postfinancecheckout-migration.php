@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -54,6 +54,7 @@ class WC_PostFinanceCheckout_Migration {
 		'1.0.7' => 'update_1_0_7_migrate_plugin_name_and_tables',
 		'1.0.8' => 'update_1_0_8_store_default_status_mappings',
 		'1.0.9' => 'update_1_0_9_restore_default_status_mappings',
+		'1.0.10' => 'update_1_0_10_remove_previous_min_version',
 	);
 
 	/**
@@ -186,7 +187,7 @@ class WC_PostFinanceCheckout_Migration {
 	 * @return void
 	 */
 	public static function wp_initialize_site( WP_Site $site, array $args ) { //phpcs:ignore
-		if ( is_plugin_active_for_network( 'woo-postfinancecheckout/woocommerce-postfinancecheckout.php' ) ) {
+		if ( is_plugin_active_for_network( 'woo-postfinancecheckout/postfinancecheckout.php' ) ) {
 			$blog_id = $site->blog_id;
 			// Defensive check: blog_id should always be set, otherwise will be shown as postfinancecheckout error
 			if ( ! $blog_id ) {
@@ -277,7 +278,7 @@ class WC_PostFinanceCheckout_Migration {
 	public static function plugin_row_meta( $links, $file ) {
 		if ( WC_POSTFINANCECHECKOUT_PLUGIN_BASENAME === $file ) {
 			$row_meta = array(
-				'docs' => '<a href="https://plugin-documentation.postfinance-checkout.ch/pfpayments/woocommerce/3.3.20/docs/en/documentation.html" aria-label="' . esc_html__( 'View Documentation', 'woo-postfinancecheckout' ) . '">' . esc_html__( 'Documentation', 'woo-postfinancecheckout' ) . '</a>',
+				'docs' => '<a href="https://plugin-documentation.postfinance-checkout.ch/pfpayments/woocommerce/3.4.6/docs/en/documentation.html" aria-label="' . esc_html__( 'View Documentation', 'woo-postfinancecheckout' ) . '">' . esc_html__( 'Documentation', 'woo-postfinancecheckout' ) . '</a>',
 			);
 
 			return array_merge( $links, $row_meta );
@@ -690,26 +691,6 @@ class WC_PostFinanceCheckout_Migration {
 			);
 			return;
 		}
-		$woocommerce_data = get_plugin_data( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php', false, false );
-		if ( version_compare( $woocommerce_data['Version'], WC_POSTFINANCECHECKOUT_REQUIRED_WC_MAXIMUM_VERSION, '>' ) ) {
-			$notice_id = "postfinancecheckout-{$woocommerce_data['Version']}-not-yet-supported";
-			if ( ! WC_Admin_Notices::user_has_dismissed_notice( $notice_id ) ) {
-				$message = sprintf(
-					/* translators: 1: Required WooCommerce version, 2: Installed WooCommerce version */
-					__( 'The plugin PostFinanceCheckout has been tested up to WooCommerce %1$s but you have installed the version %2$s. Please notice that this is not recommended.', 'woo-postfinancecheckout' ),
-					WC_POSTFINANCECHECKOUT_REQUIRED_WC_MAXIMUM_VERSION,
-					$woocommerce_data['Version']
-				);
-				WC_Admin_Notices::add_custom_notice( $notice_id, esc_html( $message ) );
-
-				// Clean up previous dismissals stored in the user data, from previous versions.
-				$previous_version = get_user_meta( get_current_user_id(), 'postfinancecheckout-previous-wc-min-version' );
-				if ( $previous_version ) {
-					delete_user_meta( get_current_user_id(), "dismissed_postfinancecheckout-{$previous_version[0]}-not-yet-supported_notice" );
-				}
-				update_user_meta( get_current_user_id(), 'postfinancecheckout-previous-wc-min-version', $woocommerce_data['Version'] );
-			}
-		}
 	}
 
 	/**
@@ -774,6 +755,13 @@ class WC_PostFinanceCheckout_Migration {
 	public static function update_1_0_9_restore_default_status_mappings() {
 		$status_adapter = new WC_PostFinanceCheckout_Order_Status_Adapter();
 		$status_adapter->store_default_status_mappings_on_database();
+	}
+
+	/**
+	 * Remove deprecated previous min version metadata
+	 */
+	public static function update_1_0_10_remove_previous_min_version() {
+		delete_metadata( 'user', 0, "postfinancecheckout-previous-wc-min-version", '', true );
 	}
 }
 

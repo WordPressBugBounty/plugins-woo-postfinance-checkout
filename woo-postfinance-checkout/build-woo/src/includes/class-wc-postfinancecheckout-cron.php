@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: PostFinanceCheckout
- * Author: postfinancecheckout AG
+ * Author: PostFinance Ltd
  * Text Domain: postfinancecheckout
  * Domain Path: /languages/
  *
@@ -10,7 +10,7 @@
  *
  * @category Class
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -47,7 +47,7 @@ class WC_PostFinanceCheckout_Cron {
 	public static function add_custom_cron_schedule( $schedules ) {
 		$schedules['five_minutes'] = array(
 			'interval' => 300,
-			'display'  => esc_html__( 'Every Five Minutes' ),
+			'display'  => esc_html__( 'Every Five Minutes', 'woo-postfinancecheckout' ),
 		);
 		return $schedules;
 	}

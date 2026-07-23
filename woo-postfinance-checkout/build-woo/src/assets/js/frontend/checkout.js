@@ -4,7 +4,7 @@
  * This plugin will add support for all PostFinanceCheckout payments methods and connect the PostFinanceCheckout servers to your WooCommerce webshop (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html).
  *
  * @package  PostFinanceCheckout
- * @author   postfinancecheckout AG (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
+ * @author   PostFinance Ltd (https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html)
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Software License (ASL 2.0)
  */
 
@@ -47,12 +47,6 @@ jQuery(
 			},
 
 			init : function () {
-				const selected = this.get_selected_payment_method();
-
-				if (selected === 'postfinancecheckout_zero') {
-					return;
-				}
-
 				// Payment methods.
 				this.$checkout_form.off( 'click.woo-postfinancecheckout' ).on(
 					'click.woo-postfinancecheckout',
@@ -308,6 +302,9 @@ jQuery(
 			},
 
 			is_supported_method : function (method_id) {
+				if (!method_id || method_id === 'postfinancecheckout_zero') {
+					return false;
+				}
 				return method_id && (method_id.indexOf( 'postfinancecheckout_' ) === 0);
 			},
 
