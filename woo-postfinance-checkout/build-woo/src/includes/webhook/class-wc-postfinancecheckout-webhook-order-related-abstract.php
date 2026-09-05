@@ -76,8 +76,8 @@ abstract class WC_PostFinanceCheckout_Webhook_Order_Related_Abstract extends WC_
 	 *
 	 * This must be implemented
 	 *
-	 * @param WC_Order $order order.
-	 * @param Object   $entity entity.
+	 * @param WC_Order                               $order order.
+	 * @param Object                                 $entity entity.
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request request.
 	 */
 	abstract protected function process_order_related_inner( WC_Order $order, $entity, $request );

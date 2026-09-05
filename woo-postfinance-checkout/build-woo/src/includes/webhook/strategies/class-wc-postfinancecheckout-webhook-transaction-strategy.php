@@ -40,12 +40,12 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Meant to bridge code from deprecated processor.
 	 *
 	 * @param WC_Order $order order.
-	 * @param mixed $transaction transaction.
+	 * @param mixed    $transaction transaction.
 	 * @return mixed The result of the processing.
 	 */
 	public function bridge_process_order_related_inner( WC_Order $order, $transaction ) {
-        $this->process_order_related_inner( $order, $transaction, true );
-    }
+		$this->process_order_related_inner( $order, $transaction, true );
+	}
 
 	/**
 	 * Process the webhook request.
@@ -67,7 +67,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 
 		if ( false != $order && $order->get_id() ) {
 			$this->process_order_related_inner( $order, $entity );
-			if ($request->get_state() === \PostFinanceCheckout\Sdk\Model\TransactionState::AUTHORIZED) {
+			if ( $request->get_state() === \PostFinanceCheckout\Sdk\Model\TransactionState::AUTHORIZED ) {
 				do_action( 'postfinancecheckout_transaction_authorized_send_email', $order->get_id() );
 			}
 		}
@@ -77,8 +77,8 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Process order related inner.
 	 *
 	 * @param WC_Order $order order.
-	 * @param mixed $transaction transaction.
-	 * @param bool $legacy_mode legacy code used.
+	 * @param mixed    $transaction transaction.
+	 * @param bool     $legacy_mode legacy code used.
 	 * @return void
 	 * @throws Exception Exception.
 	 */
@@ -130,7 +130,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 		if ( $legacy_mode ) {
 			// This is edge case for deferred payment methods
 			$transaction_info = WC_PostFinanceCheckout_Entity_Transaction_Info::load_by_order_id( $order->get_id() );
-			if ($transaction_info->get_state() === \PostFinanceCheckout\Sdk\Model\TransactionState::AUTHORIZED) {
+			if ( $transaction_info->get_state() === \PostFinanceCheckout\Sdk\Model\TransactionState::AUTHORIZED ) {
 				do_action( 'postfinancecheckout_transaction_authorized_send_email', $order->get_id() );
 			}
 		}
@@ -140,7 +140,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Confirm.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                                   $order order.
 	 * @return void
 	 */
 	protected function confirm( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
@@ -161,7 +161,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Authorize.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param \WC_Order $order order.
+	 * @param \WC_Order                                  $order order.
 	 */
 	protected function authorize( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
 		if ( ! $order->get_meta( '_postfinancecheckout_authorized', true ) ) {
@@ -180,7 +180,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Waiting.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                                   $order order.
 	 * @return void
 	 */
 	protected function waiting( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
@@ -199,7 +199,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Decline.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                                   $order order.
 	 * @return void
 	 */
 	protected function decline( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
@@ -216,7 +216,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Failed.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                                   $order order.
 	 * @return void
 	 */
 	protected function failed( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
@@ -230,7 +230,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 			'pending',
 			// Custom order statuses mapped.
 			apply_filters( 'postfinancecheckout_wc_status_for_transaction', 'confirmed' ),
-			apply_filters( 'postfinancecheckout_wc_status_for_transaction', 'failed' )
+			apply_filters( 'postfinancecheckout_wc_status_for_transaction', 'failed' ),
 		);
 		if ( in_array( $order->get_status( 'edit' ), $valid_order_statuses ) ) {
 			$default_status = apply_filters( 'wc_postfinancecheckout_failed_status', 'failed', $order );
@@ -243,7 +243,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Fulfill.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                                   $order order.
 	 * @return void
 	 */
 	protected function fulfill( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
@@ -273,7 +273,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Strategy extends WC_PostFinance
 	 * Voided.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction transaction.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                                   $order order.
 	 * @return void
 	 */
 	protected function voided( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {

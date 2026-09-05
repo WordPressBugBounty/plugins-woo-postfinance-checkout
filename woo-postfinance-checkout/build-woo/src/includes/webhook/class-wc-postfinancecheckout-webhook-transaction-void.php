@@ -33,7 +33,6 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void extends WC_PostFinanceChec
 
 	/**
 	 * Construct to initialize canonical processor.
-	 *
 	 */
 	public function __construct() {
 		$this->strategy = new WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy();
@@ -50,10 +49,10 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void extends WC_PostFinanceChec
 	 */
 	protected function load_entity( WC_PostFinanceCheckout_Webhook_Request $request ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy::load_entity'
-        );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy::load_entity'
+		);
 		return $this->strategy->load_entity( $request );
 	}
 
@@ -65,10 +64,10 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void extends WC_PostFinanceChec
 	 */
 	protected function get_order_id( $void_transaction ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy::get_order_id'
-        );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy::get_order_id'
+		);
 		return $this->strategy->get_order_id( $void_transaction );
 	}
 
@@ -86,17 +85,17 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void extends WC_PostFinanceChec
 	/**
 	 * Process order related inner.
 	 *
-	 * @param WC_Order $order order.
-	 * @param mixed $void_transaction void transaction.
+	 * @param WC_Order                               $order order.
+	 * @param mixed                                  $void_transaction void transaction.
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request request.
 	 * @return void
 	 */
 	protected function process_order_related_inner( WC_Order $order, $void_transaction, $request ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy::process_order_related_inner'
-        );
-        $this->strategy->bridge_process_order_related_inner( $order, $void_transaction, $request );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy::process_order_related_inner'
+		);
+		$this->strategy->bridge_process_order_related_inner( $order, $void_transaction, $request );
 	}
 }

@@ -63,14 +63,14 @@ class WC_PostFinanceCheckout_Webhook_Refund_Strategy extends WC_PostFinanceCheck
 	/**
 	 * Meant to bridge code from deprecated processor.
 	 *
-	 * @param WC_Order $order The WooCommerce order associated with the refund.
-	 * @param \PostFinanceCheckout\Sdk\Model\Refund $refund The transaction refund object.
+	 * @param WC_Order                               $order The WooCommerce order associated with the refund.
+	 * @param \PostFinanceCheckout\Sdk\Model\Refund  $refund The transaction refund object.
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request The webhook request object.
 	 * @return void
 	 */
 	public function bridge_process_order_related_inner( WC_Order $order, \PostFinanceCheckout\Sdk\Model\Refund $refund, WC_PostFinanceCheckout_Webhook_Request $request ) {
-        $this->process_order_related_inner( $order, $refund, $request, true );
-    }
+		$this->process_order_related_inner( $order, $refund, $request, true );
+	}
 
 	/**
 	 * Processes the incoming webhook request related to refunds.
@@ -93,10 +93,10 @@ class WC_PostFinanceCheckout_Webhook_Refund_Strategy extends WC_PostFinanceCheck
 	/**
 	 * Performs additional order-related processing based on the refund state.
 	 *
-	 * @param WC_Order $order The WooCommerce order associated with the refund.
-	 * @param \PostFinanceCheckout\Sdk\Model\Refund $refund The transaction refund object.
+	 * @param WC_Order                               $order The WooCommerce order associated with the refund.
+	 * @param \PostFinanceCheckout\Sdk\Model\Refund  $refund The transaction refund object.
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request The webhook request object.
-	 * @param bool $legacy_mode legacy code used.
+	 * @param bool                                   $legacy_mode legacy code used.
 	 * @return void
 	 */
 	protected function process_order_related_inner( WC_Order $order, \PostFinanceCheckout\Sdk\Model\Refund $refund, WC_PostFinanceCheckout_Webhook_Request $request, $legacy_mode = false ) {
@@ -120,7 +120,7 @@ class WC_PostFinanceCheckout_Webhook_Refund_Strategy extends WC_PostFinanceCheck
 	 * Handles actions to be performed when a refund transaction fails.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Refund $refund refund.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                              $order order.
 	 * @return void
 	 * @throws Exception Exception.
 	 */
@@ -147,7 +147,7 @@ class WC_PostFinanceCheckout_Webhook_Refund_Strategy extends WC_PostFinanceCheck
 	 * Handles actions to be performed when a refund transaction is successful.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Refund $refund refund.
-	 * @param WC_Order $order order.
+	 * @param WC_Order                              $order order.
 	 * @return void
 	 * @throws Exception Exception.
 	 */

@@ -41,17 +41,19 @@ module.exports = {
 	plugins: [
 		...defaultConfig.plugins.filter(
 			( plugin ) =>
-				plugin.constructor.name !== 'DependencyExtractionWebpackPlugin'
+			plugin.constructor.name !== 'DependencyExtractionWebpackPlugin'
 		),
-		new DependencyExtractionWebpackPlugin( {
-			injectPolyfill: true,
-			requestToExternal,
-			requestToHandle,
-		} ),
+		new DependencyExtractionWebpackPlugin(
+			{
+				injectPolyfill: true,
+					requestToExternal,
+					requestToHandle,
+			}
+		),
 	],
-	resolve: {
-		fallback: {
-		  util: require.resolve("util/")
-		}
+resolve: {
+	fallback: {
+		util: require.resolve( "util/" )
+	}
 	}
 };

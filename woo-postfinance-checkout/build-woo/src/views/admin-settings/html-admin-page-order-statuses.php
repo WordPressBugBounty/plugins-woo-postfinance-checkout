@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit;
 				</header>
 				<article>
 				<form action="" method="post">
-                    <input type="hidden" name="key" value="{{{ data.key }}}" />
+					<input type="hidden" name="key" value="{{{ data.key }}}" />
 					<?php
 					foreach ( $order_statuses_columns as $status_key => $heading ) {
 						echo '<div class="postfinancecheckout-order-statuses-modal-input wc-shipping-class-modal-input ' . esc_attr( $status_key ) . '">';
@@ -73,7 +73,7 @@ defined( 'ABSPATH' ) || exit;
 											style="flex: 1; padding: 12px; border-radius: 0 4px 4px 0;"
 											placeholder="<?php esc_attr_e( 'e.g. awaiting', 'woo-postfinancecheckout' ); ?>" />
 									</label>
-                                    <small id="charCount" style="color: gray;"></small>
+									<small id="charCount" style="color: gray;"></small>
 								</div>
 								<div class="postfinancecheckout-order-statuses-modal-help-text wc-shipping-class-modal-help-text"><?php esc_html_e( 'Give your custom status a name for easy identification', 'woo-postfinancecheckout' ); ?></div>
 								<?php

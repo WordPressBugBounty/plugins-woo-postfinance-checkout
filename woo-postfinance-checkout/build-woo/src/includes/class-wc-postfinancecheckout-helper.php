@@ -146,7 +146,7 @@ class WC_PostFinanceCheckout_Helper {
 	 * @param array $additional_headers Additional headers.
 	 * @return void
 	 */
-	public static function add_headers( &$api_client, array $additional_headers = [] ) {
+	public static function add_headers( &$api_client, array $additional_headers = array() ) {
 		$default_header_data = self::get_default_header_data();
 		$default_header_data = array_merge( $default_header_data, $additional_headers );
 		foreach ( $default_header_data as $key => $value ) {
@@ -277,11 +277,10 @@ class WC_PostFinanceCheckout_Helper {
 			}
 			// Handle gift cards separately (already negative, do not abs())
 			elseif ( \PostFinanceCheckout\Sdk\Model\LineItemType::DISCOUNT === $type
-				&& stripos( $name, WC_PostFinanceCheckout_Packages_Gift_Card::POSTFINANCECHECKOUT_GIFT_CARD) !== false
+				&& stripos( $name, WC_PostFinanceCheckout_Packages_Gift_Card::POSTFINANCECHECKOUT_GIFT_CARD ) !== false
 			) {
 				$sum += $line_item->getAmountIncludingTax();
-			}
-			else {
+			} else {
 				$sum += $line_item->getAmountIncludingTax();
 			}
 		}
@@ -300,7 +299,7 @@ class WC_PostFinanceCheckout_Helper {
 	public function cleanup_line_items( array $line_items, $expected_sum, $currency, bool $is_recurrent = false ) {
 		// Check if coupon is applied to order. Session cart might be empty during webhook processing.
 		$has_coupons = apply_filters( 'wc_postfinancecheckout_packages_coupon_line_items_have_coupon_discounts', $line_items, $currency );
- 		// ensure that the effective sum coincides with the total discounted by the coupons.
+		// ensure that the effective sum coincides with the total discounted by the coupons.
 		$effective_sum = $this->round_amount( $this->get_total_amount_including_tax( $line_items, $has_coupons ), $currency );
 		$rounded_expected_sum = $this->round_amount( $expected_sum, $currency );
 
@@ -633,7 +632,7 @@ class WC_PostFinanceCheckout_Helper {
 		$version = WC_VERSION;
 
 		$shop_version = str_replace( 'v', '', $version );
-		$plugin_version = '3.4.6';
+		$plugin_version = '3.4.7';
 		list ($major_version, $minor_version) = explode( '.', $shop_version, 3 );
 		return array(
 			self::POSTFINANCECHECKOUT_SHOP_SYSTEM => 'woocommerce',
@@ -644,17 +643,17 @@ class WC_PostFinanceCheckout_Helper {
 	}
 
 	/**
-	* Get WooCommerce order statuses in JSON format.
-	*
-	* This method retrieves the WooCommerce order statuses, applies any filters,
-	* and returns them as an array with structured data.
-	*
-	* @return array[] An array of WooCommerce order statuses, where each status is represented
-	*                 as an associative array containing:
-	*                 - 'key' (string)   : The order status key.
-	*                 - 'label' (string) : The human-readable label for the status.
-	*                 - 'type' (string)  : The type of status ('core' if it starts with 'wc-', otherwise 'custom').
-	*/
+	 * Get WooCommerce order statuses in JSON format.
+	 *
+	 * This method retrieves the WooCommerce order statuses, applies any filters,
+	 * and returns them as an array with structured data.
+	 *
+	 * @return array[] An array of WooCommerce order statuses, where each status is represented
+	 *                 as an associative array containing:
+	 *                 - 'key' (string)   : The order status key.
+	 *                 - 'label' (string) : The human-readable label for the status.
+	 *                 - 'type' (string)  : The type of status ('core' if it starts with 'wc-', otherwise 'custom').
+	 */
 	public function get_woocommerce_order_statuses_json() {
 		$woocommerce_statuses = apply_filters( 'postfinancecheckout_woocommerce_statuses', array() );
 		$excluded_statuses = array(
@@ -666,7 +665,7 @@ class WC_PostFinanceCheckout_Helper {
 			'wc-refunded',
 			'wc-failed',
 			'wc-trash',
-			'wc-checkout-draft'
+			'wc-checkout-draft',
 		);
 		if ( self::is_custom_status_mapping_enabled() ) {
 			$excluded_statuses = array_merge(
@@ -674,12 +673,13 @@ class WC_PostFinanceCheckout_Helper {
 				array(
 					'wc-postfi-manual',
 					'wc-postfi-redirected',
-					'wc-postfi-waiting'
+					'wc-postfi-waiting',
 				)
 			);
 		}
 
-		return array_map( function( $key, $value ) use ( $excluded_statuses ) {
+		return array_map(
+			function ( $key, $value ) use ( $excluded_statuses ) {
 				return array(
 					'key'  => $key,
 					'label' => ucfirst( $value ),
@@ -776,7 +776,7 @@ class WC_PostFinanceCheckout_Helper {
 			}
 		}
 
-		if ( !$is_preorder && !$is_out_of_stock ) {
+		if ( ! $is_preorder && ! $is_out_of_stock ) {
 			return;
 		}
 
@@ -795,12 +795,12 @@ class WC_PostFinanceCheckout_Helper {
 			}
 
 			$order->update_status(
-			  $preorder_status_slug,
-			  __( 'Product is on pre-order. Status set automatically.', 'woo-postfinancecheckout' )
+				$preorder_status_slug,
+				__( 'Product is on pre-order. Status set automatically.', 'woo-postfinancecheckout' )
 			);
 
 			$order->add_order_note(
-			  __( 'Order status automatically set to pre-order.', 'woo-postfinancecheckout' )
+				__( 'Order status automatically set to pre-order.', 'woo-postfinancecheckout' )
 			);
 		}
 	}
@@ -822,5 +822,4 @@ class WC_PostFinanceCheckout_Helper {
 		);
 		return $settings;
 	}
-
 }

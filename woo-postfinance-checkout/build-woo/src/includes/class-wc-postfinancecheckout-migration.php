@@ -73,7 +73,7 @@ class WC_PostFinanceCheckout_Migration {
 			'wp_initialize_site',
 			array(
 				__CLASS__,
-				'wp_initialize_site'
+				'wp_initialize_site',
 			),
 			10,
 			2
@@ -180,10 +180,11 @@ class WC_PostFinanceCheckout_Migration {
 	 * Create tables if new MU blog is created
 	 *
 	 * wp_initialize_site hook introduced since 5.1.0
+	 *
 	 * @link https://developer.wordpress.org/reference/hooks/wp_initialize_site/
 	 *
 	 * @param WP_Site $site
-	 * @param array $args
+	 * @param array   $args
 	 * @return void
 	 */
 	public static function wp_initialize_site( WP_Site $site, array $args ) { //phpcs:ignore
@@ -192,7 +193,7 @@ class WC_PostFinanceCheckout_Migration {
 			// Defensive check: blog_id should always be set, otherwise will be shown as postfinancecheckout error
 			if ( ! $blog_id ) {
 				$logger = wc_get_logger();
-				$logger->error( 'Could not detect blog_id during wp_initialize_site.', [ 'source' => 'postfinancecheckout' ] );
+				$logger->error( 'Could not detect blog_id during wp_initialize_site.', array( 'source' => 'postfinancecheckout' ) );
 				return;
 			}
 
@@ -278,7 +279,7 @@ class WC_PostFinanceCheckout_Migration {
 	public static function plugin_row_meta( $links, $file ) {
 		if ( WC_POSTFINANCECHECKOUT_PLUGIN_BASENAME === $file ) {
 			$row_meta = array(
-				'docs' => '<a href="https://plugin-documentation.postfinance-checkout.ch/pfpayments/woocommerce/3.4.6/docs/en/documentation.html" aria-label="' . esc_html__( 'View Documentation', 'woo-postfinancecheckout' ) . '">' . esc_html__( 'Documentation', 'woo-postfinancecheckout' ) . '</a>',
+				'docs' => '<a href="https://plugin-documentation.postfinance-checkout.ch/pfpayments/woocommerce/3.4.7/docs/en/documentation.html" aria-label="' . esc_html__( 'View Documentation', 'woo-postfinancecheckout' ) . '">' . esc_html__( 'Documentation', 'woo-postfinancecheckout' ) . '</a>',
 			);
 
 			return array_merge( $links, $row_meta );
@@ -761,7 +762,7 @@ class WC_PostFinanceCheckout_Migration {
 	 * Remove deprecated previous min version metadata
 	 */
 	public static function update_1_0_10_remove_previous_min_version() {
-		delete_metadata( 'user', 0, "postfinancecheckout-previous-wc-min-version", '', true );
+		delete_metadata( 'user', 0, 'postfinancecheckout-previous-wc-min-version', '', true );
 	}
 }
 

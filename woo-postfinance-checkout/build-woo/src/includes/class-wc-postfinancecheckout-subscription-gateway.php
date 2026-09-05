@@ -96,7 +96,7 @@ class WC_PostFinanceCheckout_Subscription_Gateway {
 	 */
 	public function process_scheduled_subscription_payment( $amount_to_charge, WC_Order $order ) {
 		try {
-			$token_data = $this->get_token_data_from_order($order);
+			$token_data = $this->get_token_data_from_order( $order );
 
 			$token_space_id = $token_data['_postfinancecheckout_subscription_space_id'];
 			$token_id = $token_data['_postfinancecheckout_subscription_token_id'];
@@ -212,46 +212,45 @@ class WC_PostFinanceCheckout_Subscription_Gateway {
 	 * @param WC_Order $order Order.
 	 * @return array
 	 */
-	private function get_token_data_from_order($order)
-	{
+	private function get_token_data_from_order( $order ) {
 		$order_id = $order->get_id();
-		$token_data = [];
+		$token_data = array();
 		$token_data['_postfinancecheckout_subscription_space_id'] = get_post_meta( $order_id, '_postfinancecheckout_subscription_space_id', true );
 		$token_data['_postfinancecheckout_subscription_token_id'] = get_post_meta( $order_id, '_postfinancecheckout_subscription_token_id', true );
 
-		if( ! isset($token_data['_postfinancecheckout_subscription_space_id']) || isset($token_data['_postfinancecheckout_subscription_token_id']) ) {
+		if ( ! isset( $token_data['_postfinancecheckout_subscription_space_id'] ) || isset( $token_data['_postfinancecheckout_subscription_token_id'] ) ) {
 
 			$subscriptions = wcs_get_subscriptions_for_renewal_order( $order_id );
 			// In theory, each of the array elements should contain the same token and space data
-			$subscription_object = array_pop($subscriptions);
+			$subscription_object = array_pop( $subscriptions );
 			$subscription_meta = $subscription_object->get_meta_data();
-			$token_data = [];
-			$subscription_keys = [
+			$token_data = array();
+			$subscription_keys = array(
 				'_postfinancecheckout_subscription_space_id',
-				'_postfinancecheckout_subscription_token_id'
-			];
+				'_postfinancecheckout_subscription_token_id',
+			);
 
-			foreach( $subscription_meta as $meta_data ) {
+			foreach ( $subscription_meta as $meta_data ) {
 				$contained_data = $meta_data->get_data();
-				if ( in_array($contained_data['key'], $subscription_keys ) ) {
-					$token_data[$contained_data['key']] = $contained_data['value'];
+				if ( in_array( $contained_data['key'], $subscription_keys ) ) {
+					$token_data[ $contained_data['key'] ] = $contained_data['value'];
 				}
 			}
 		}
 
-		if( ! isset($token_data['_postfinancecheckout_subscription_space_id']) ) {
+		if ( ! isset( $token_data['_postfinancecheckout_subscription_space_id'] ) ) {
 			$order->update_status( 'failed', esc_html__( 'No Space Id is found.', 'woo-postfinancecheckout' ) );
-			throw new Exception('Missing space id details');
+			throw new Exception( 'Missing space id details' );
 		}
 
-		if( ! isset($token_data['_postfinancecheckout_subscription_token_id']) ) {
+		if ( ! isset( $token_data['_postfinancecheckout_subscription_token_id'] ) ) {
 			$order->update_status( 'failed', esc_html__( 'No Token Id is found.', 'woo-postfinancecheckout' ) );
-			throw new Exception('Missing token id');
+			throw new Exception( 'Missing token id' );
 		}
 
 		if ( get_option( WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_SPACE_ID ) != $token_data['_postfinancecheckout_subscription_space_id'] ) {
 			$order->update_status( 'failed', esc_html__( 'The token space and the configured space are not equal.', 'woo-postfinancecheckout' ) );
-			throw new Exception('Token space does not match configured space');
+			throw new Exception( 'Token space does not match configured space' );
 		}
 
 		return $token_data;
@@ -313,7 +312,7 @@ class WC_PostFinanceCheckout_Subscription_Gateway {
 	 * @return mixed|void
 	 */
 	public function create_json_response( $location, $status ) {
-		$location = basename($location);
+		$location = basename( $location );
 		if ( 'wc_postfinancecheckout_subscription_redirect' == $location && isset( $GLOBALS['_wc_postfinancecheckout_subscription_gateway_result'] ) ) {
 			wp_send_json( $GLOBALS['_wc_postfinancecheckout_subscription_gateway_result'] );
 			exit;

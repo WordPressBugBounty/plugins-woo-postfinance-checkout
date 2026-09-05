@@ -33,7 +33,6 @@ class WC_PostFinanceCheckout_Webhook_Transaction extends WC_PostFinanceCheckout_
 
 	/**
 	 * Construct to initialize canonical processor.
-	 *
 	 */
 	public function __construct() {
 		$this->strategy = new WC_PostFinanceCheckout_Webhook_Transaction_Strategy();
@@ -78,17 +77,17 @@ class WC_PostFinanceCheckout_Webhook_Transaction extends WC_PostFinanceCheckout_
 	/**
 	 * Process order related inner.
 	 *
-	 * @param WC_Order $order order.
-	 * @param mixed $transaction transaction.
+	 * @param WC_Order                               $order order.
+	 * @param mixed                                  $transaction transaction.
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request request.
 	 * @return void
 	 */
 	protected function process_order_related_inner( WC_Order $order, $transaction, $request ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Strategy::process_order_related_inner'
-        );
-        $this->strategy->bridge_process_order_related_inner( $order, $transaction );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Strategy::process_order_related_inner'
+		);
+		$this->strategy->bridge_process_order_related_inner( $order, $transaction );
 	}
 }

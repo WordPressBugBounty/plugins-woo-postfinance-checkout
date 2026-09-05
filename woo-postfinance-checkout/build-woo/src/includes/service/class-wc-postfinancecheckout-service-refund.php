@@ -78,7 +78,7 @@ class WC_PostFinanceCheckout_Service_Refund extends WC_PostFinanceCheckout_Servi
 	 *
 	 * If the amount of the given reductions does not match the refund's grand total, the amount to refund is distributed equally to the line items.
 	 *
-	 * @param WC_Order_Refund                                            $refund refund.
+	 * @param WC_Order_Refund                                          $refund refund.
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction               $transaction transaction.
 	 * @param \PostFinanceCheckout\Sdk\Model\LineItemReductionCreate[] $reductions reductions.
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemReductionCreate[]
@@ -116,10 +116,10 @@ class WC_PostFinanceCheckout_Service_Refund extends WC_PostFinanceCheckout_Servi
 	 * Distribute rounding difference.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\LineItemReductionCreate[] $reductions reductions.
-	 * @param int                                                        $index index.
-	 * @param number                                                     $remainder remainder.
+	 * @param int                                                      $index index.
+	 * @param number                                                   $remainder remainder.
 	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[]                $base_line_items base line items.
-	 * @param string                                                     $currency_code currency code.
+	 * @param string                                                   $currency_code currency code.
 	 * @throws Exception Exception.
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemReductionCreate[]
 	 */
@@ -291,7 +291,7 @@ class WC_PostFinanceCheckout_Service_Refund extends WC_PostFinanceCheckout_Servi
 	/**
 	 * Sends the refund to the gateway.
 	 *
-	 * @param int                                           $space_id space id.
+	 * @param int                                         $space_id space id.
 	 * @param \PostFinanceCheckout\Sdk\Model\RefundCreate $refund refund.
 	 * @return \PostFinanceCheckout\Sdk\Model\Refund
 	 * @throws Exception Exception.

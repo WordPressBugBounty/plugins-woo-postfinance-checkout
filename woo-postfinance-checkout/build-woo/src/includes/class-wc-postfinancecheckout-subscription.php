@@ -340,7 +340,7 @@ final class WC_PostFinanceCheckout_Subscription {
 	 * Update transaction from order.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\AbstractTransactionPending $transaction Transaction.
-	 * @param mixed                                                       $order Order.
+	 * @param mixed                                                     $order Order.
 	 * @return \PostFinanceCheckout\Sdk\Model\AbstractTransactionPending
 	 */
 	public function update_transaction_from_order( \PostFinanceCheckout\Sdk\Model\AbstractTransactionPending $transaction, $order ) {
@@ -395,7 +395,7 @@ final class WC_PostFinanceCheckout_Subscription {
 	 * Update subscription data.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction Transaction.
-	 * @param mixed                                        $order Order.
+	 * @param mixed                                      $order Order.
 	 * @return void
 	 */
 	public function update_subscription_data( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, $order ) {
@@ -460,7 +460,7 @@ final class WC_PostFinanceCheckout_Subscription {
 	 * Fulfill in progress.
 	 *
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction Transaction.
-	 * @param mixed                                        $order Order.
+	 * @param mixed                                      $order Order.
 	 * @return void
 	 */
 	public function fulfill_in_progress( \PostFinanceCheckout\Sdk\Model\Transaction $transaction, $order ) {
@@ -489,7 +489,7 @@ final class WC_PostFinanceCheckout_Subscription {
 	 *
 	 * @param WC_PostFinanceCheckout_Entity_Transaction_Info $info Info.
 	 * @param \PostFinanceCheckout\Sdk\Model\Transaction     $transaction Transaction.
-	 * @param WC_Order                                         $order Oder.
+	 * @param WC_Order                                       $order Oder.
 	 * @return WC_PostFinanceCheckout_Entity_Transaction_Info
 	 */
 	public function update_transaction_info( WC_PostFinanceCheckout_Entity_Transaction_Info $info, \PostFinanceCheckout\Sdk\Model\Transaction $transaction, WC_Order $order ) {
@@ -625,5 +625,3 @@ final class WC_PostFinanceCheckout_Subscription {
 		return $url;
 	}
 }
-
-

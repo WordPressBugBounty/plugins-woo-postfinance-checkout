@@ -7,16 +7,16 @@ import React from 'react';
  * @returns {Object} An object containing the src, alt, and width values.
  */
 function parseImgTag(imgTag) {
-    const srcMatch = imgTag.match(/src="([^"]+)"/);
+	const srcMatch = imgTag.match( /src="([^"]+)"/ );
 	// Alt can be optional, hence *
-    const altMatch = imgTag.match(/alt="([^"]*)"/);
-    const widthMatch = imgTag.match(/width="([^"]+)"/);
+	const altMatch = imgTag.match( /alt="([^"]*)"/ );
+	const widthMatch = imgTag.match( /width="([^"]+)"/ );
 
-    return {
-        src: srcMatch ? srcMatch[1] : '',
-        alt: altMatch ? altMatch[1] : '',
-        width: widthMatch ? widthMatch[1] : '',
-    };
+	return {
+		src: srcMatch ? srcMatch[1] : '',
+		alt: altMatch ? altMatch[1] : '',
+		width: widthMatch ? widthMatch[1] : '',
+	};
 }
 
 /**
@@ -27,9 +27,9 @@ function parseImgTag(imgTag) {
  * @returns {JSX.Element} A JSX element representing the label and image.
  */
 function LabelComponent({ label, src, alt, width }) {
-    return (
-        <div> {label} <img src={src} alt={alt} width={width} /> </div>
-    );
+	return (
+		< div > {label} < img src = {src} alt = {alt} width = {width} / > < / div >
+	);
 }
 
 // Exporting both functions

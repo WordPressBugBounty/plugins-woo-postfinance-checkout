@@ -67,14 +67,14 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy extends WC_PostFi
 	/**
 	 * Meant to bridge code from deprecated processor.
 	 *
-	 * @param WC_Order $order The WooCommerce order associated with the void request.
+	 * @param WC_Order                                       $order The WooCommerce order associated with the void request.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionVoid $void The transaction void object.
-	 * @param WC_PostFinanceCheckout_Webhook_Request $request The webhook request object.
+	 * @param WC_PostFinanceCheckout_Webhook_Request         $request The webhook request object.
 	 * @return void
 	 */
 	public function bridge_process_order_related_inner( WC_Order $order, \PostFinanceCheckout\Sdk\Model\TransactionVoid $void, WC_PostFinanceCheckout_Webhook_Request $request ) {
-        $this->process_order_related_inner( $order, $void, $request, true );
-    }
+		$this->process_order_related_inner( $order, $void, $request, true );
+	}
 
 	/**
 	 * Processes the incoming webhook request related to transaction voids.
@@ -97,10 +97,10 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy extends WC_PostFi
 	/**
 	 * Processes additional order-related operations based on the transaction void's state.
 	 *
-	 * @param WC_Order $order The WooCommerce order associated with the void request.
+	 * @param WC_Order                                       $order The WooCommerce order associated with the void request.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionVoid $void The transaction void object.
-	 * @param WC_PostFinanceCheckout_Webhook_Request $request The webhook request object.
-	 * @param bool $legacy_mode legacy code used.
+	 * @param WC_PostFinanceCheckout_Webhook_Request         $request The webhook request object.
+	 * @param bool                                           $legacy_mode legacy code used.
 	 * @return void
 	 */
 	protected function process_order_related_inner( WC_Order $order, \PostFinanceCheckout\Sdk\Model\TransactionVoid $void, WC_PostFinanceCheckout_Webhook_Request $request, $legacy_mode = false ) {
@@ -121,7 +121,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy extends WC_PostFi
 	/**
 	 * Successfully processes a transaction void.
 	 *
-	 * @param WC_Order $order The order to process.
+	 * @param WC_Order                                       $order The order to process.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionVoid $void The transaction void.
 	 * @return void
 	 */
@@ -148,7 +148,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Void_Strategy extends WC_PostFi
 	/**
 	 * Handles a failed transaction void.
 	 *
-	 * @param WC_Order $order The order linked to the failed void.
+	 * @param WC_Order                                       $order The order linked to the failed void.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionVoid $void The transaction void.
 	 * @return void
 	 */

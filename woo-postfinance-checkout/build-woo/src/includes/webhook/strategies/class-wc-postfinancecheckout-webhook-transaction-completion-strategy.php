@@ -64,14 +64,14 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy extends WC_
 	/**
 	 * Meant to bridge code from deprecated processor.
 	 *
-	 * @param WC_Order $order The WooCommerce order linked to the completion.
+	 * @param WC_Order                                             $order The WooCommerce order linked to the completion.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion The transaction completion object.
-	 * @param WC_PostFinanceCheckout_Webhook_Request $request The webhook request.
+	 * @param WC_PostFinanceCheckout_Webhook_Request               $request The webhook request.
 	 * @return void
 	 */
 	public function bridge_process_order_related_inner( WC_Order $order, \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion, WC_PostFinanceCheckout_Webhook_Request $request ) {
-        $this->process_order_related_inner( $order, $completion, $request, true );
-    }
+		$this->process_order_related_inner( $order, $completion, $request, true );
+	}
 
 	/**
 	 * Processes the incoming webhook request pertaining to transaction completions.
@@ -94,10 +94,10 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy extends WC_
 	/**
 	 * Additional processing on the order based on the state of the transaction completion.
 	 *
-	 * @param WC_Order $order The WooCommerce order linked to the completion.
+	 * @param WC_Order                                             $order The WooCommerce order linked to the completion.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion The transaction completion object.
-	 * @param WC_PostFinanceCheckout_Webhook_Request $request The webhook request.
-	 * @param bool $legacy_mode legacy code used.
+	 * @param WC_PostFinanceCheckout_Webhook_Request               $request The webhook request.
+	 * @param bool                                                 $legacy_mode legacy code used.
 	 * @return void
 	 */
 	protected function process_order_related_inner( WC_Order $order, \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion, WC_PostFinanceCheckout_Webhook_Request $request, $legacy_mode = false ) {
@@ -118,7 +118,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy extends WC_
 	/**
 	 * Handles successful transaction completion.
 	 *
-	 * @param WC_Order $order The associated WooCommerce order.
+	 * @param WC_Order                                             $order The associated WooCommerce order.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion The transaction completion data.
 	 * @return void
 	 */
@@ -149,7 +149,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy extends WC_
 	/**
 	 * Restock non completed items.
 	 *
-	 * @param array $completed_items completed items.
+	 * @param array    $completed_items completed items.
 	 * @param WC_Order $order order.
 	 * @return void
 	 */
@@ -182,7 +182,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy extends WC_
 	/**
 	 * Adapt order items.
 	 *
-	 * @param array $completed_items completed items.
+	 * @param array    $completed_items completed items.
 	 * @param WC_Order $order order.
 	 * @return void
 	 */
@@ -273,7 +273,7 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy extends WC_
 	/**
 	 * Handles failed transaction completion.
 	 *
-	 * @param WC_Order $order The associated WooCommerce order.
+	 * @param WC_Order                                             $order The associated WooCommerce order.
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion The transaction completion data that failed.
 	 * @return void
 	 */

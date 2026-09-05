@@ -33,7 +33,6 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion extends WC_PostFinan
 
 	/**
 	 * Construct to initialize canonical processor.
-	 *
 	 */
 	public function __construct() {
 		$this->strategy = new WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy();
@@ -50,10 +49,10 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion extends WC_PostFinan
 	 */
 	protected function load_entity( WC_PostFinanceCheckout_Webhook_Request $request ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy::load_entity'
-        );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy::load_entity'
+		);
 		return $this->strategy->load_entity( $request );
 	}
 
@@ -65,10 +64,10 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion extends WC_PostFinan
 	 */
 	protected function get_order_id( $completion ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy::get_order_id'
-        );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy::get_order_id'
+		);
 		return $this->strategy->get_order_id( $completion );
 	}
 
@@ -86,17 +85,17 @@ class WC_PostFinanceCheckout_Webhook_Transaction_Completion extends WC_PostFinan
 	/**
 	 * Process order realted inner.
 	 *
-	 * @param WC_Order $order order.
-	 * @param mixed $completion completion.
+	 * @param WC_Order                               $order order.
+	 * @param mixed                                  $completion completion.
 	 * @param WC_PostFinanceCheckout_Webhook_Request $request request.
 	 * @return void
 	 */
 	protected function process_order_related_inner( WC_Order $order, $completion, $request ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy::process_order_related_inner'
-        );
-        $this->strategy->bridge_process_order_related_inner( $order, $completion, $request );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Transaction_Completion_Strategy::process_order_related_inner'
+		);
+		$this->strategy->bridge_process_order_related_inner( $order, $completion, $request );
 	}
 }

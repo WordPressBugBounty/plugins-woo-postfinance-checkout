@@ -35,10 +35,10 @@ class WC_PostFinanceCheckout_Webhook_Token extends WC_PostFinanceCheckout_Webhoo
 	 */
 	public function process( WC_PostFinanceCheckout_Webhook_Request $request ) {
 		wc_deprecated_function(
-            __METHOD__,
-            '3.0.12',
-            'WC_PostFinanceCheckout_Webhook_Token_Strategy::process'
-        );
+			__METHOD__,
+			'3.0.12',
+			'WC_PostFinanceCheckout_Webhook_Token_Strategy::process'
+		);
 		$strategy = new WC_PostFinanceCheckout_Webhook_Token_Strategy();
 		$strategy->process( $request );
 	}

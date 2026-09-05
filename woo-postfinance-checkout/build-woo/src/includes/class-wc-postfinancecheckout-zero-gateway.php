@@ -23,36 +23,36 @@ class WC_PostFinanceCheckout_Zero_Gateway extends WC_Payment_Gateway {
 		$this->title = $this->get_option( 'title' );
 
 		add_action(
-		  'woocommerce_update_options_payment_gateways_' . $this->id,
-		  array( $this, 'process_admin_options' )
+			'woocommerce_update_options_payment_gateways_' . $this->id,
+			array( $this, 'process_admin_options' )
 		);
 
 		add_filter(
-		  'woocommerce_available_payment_gateways',
-		  array( $this, 'hide_gateways_for_zero_order_total' )
+			'woocommerce_available_payment_gateways',
+			array( $this, 'hide_gateways_for_zero_order_total' )
 		);
 	}
 
 	public function init_form_fields() {
 		$this->form_fields = array(
-		  'enabled' => array(
-			'title'   => __( 'Enable/Disable', 'woo-postfinancecheckout' ),
-			'type'    => 'checkbox',
-			'label'   => __( 'Enable No Payment Required Gateway', 'woo-postfinancecheckout' ),
-			'default' => 'yes',
-		  ),
-		  'title' => array(
-			'title'       => __( 'Title', 'woo-postfinancecheckout' ),
-			'type'        => 'text',
-			'description' => __( 'This controls the title seen by the customer during checkout.', 'woo-postfinancecheckout' ),
-			'default'     => __( 'No Payment Required', 'woo-postfinancecheckout' ),
-			'desc_tip'    => true,
-		  ),
+			'enabled' => array(
+				'title'   => __( 'Enable/Disable', 'woo-postfinancecheckout' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable No Payment Required Gateway', 'woo-postfinancecheckout' ),
+				'default' => 'yes',
+			),
+			'title' => array(
+				'title'       => __( 'Title', 'woo-postfinancecheckout' ),
+				'type'        => 'text',
+				'description' => __( 'This controls the title seen by the customer during checkout.', 'woo-postfinancecheckout' ),
+				'default'     => __( 'No Payment Required', 'woo-postfinancecheckout' ),
+				'desc_tip'    => true,
+			),
 		);
 	}
 
 	public function is_available() {
-		if (isset($_GET['pay_for_order']) && boolval($_GET['pay_for_order']) === true) {
+		if ( isset( $_GET['pay_for_order'] ) && boolval( $_GET['pay_for_order'] ) === true ) {
 			$order_id = get_query_var( 'order-pay' );
 			$order = wc_get_order( $order_id );
 
@@ -76,8 +76,8 @@ class WC_PostFinanceCheckout_Zero_Gateway extends WC_Payment_Gateway {
 		$order->add_order_note( __( 'Order completed automatically – no payment needed.', 'woo-postfinancecheckout' ) );
 
 		return array(
-		  'result'   => 'success',
-		  'redirect' => $this->get_return_url( $order ),
+			'result'   => 'success',
+			'redirect' => $this->get_return_url( $order ),
 		);
 	}
 
@@ -86,7 +86,7 @@ class WC_PostFinanceCheckout_Zero_Gateway extends WC_Payment_Gateway {
 			return $available_gateways;
 		}
 
-		if (isset($_GET['pay_for_order']) && boolval($_GET['pay_for_order']) === true) {
+		if ( isset( $_GET['pay_for_order'] ) && boolval( $_GET['pay_for_order'] ) === true ) {
 			$order_id = get_query_var( 'order-pay' );
 			$order = wc_get_order( $order_id );
 
@@ -96,7 +96,7 @@ class WC_PostFinanceCheckout_Zero_Gateway extends WC_Payment_Gateway {
 		}
 
 		$has_subscription = self::cart_has_subscription();
-		if ( WC()->cart && WC()->cart->total == 0 && !$has_subscription ) {
+		if ( WC()->cart && WC()->cart->total == 0 && ! $has_subscription ) {
 			foreach ( $available_gateways as $gateway_id => $gateway ) {
 				if ( $gateway_id !== 'postfinancecheckout_zero' ) {
 					unset( $available_gateways[ $gateway_id ] );
@@ -112,11 +112,11 @@ class WC_PostFinanceCheckout_Zero_Gateway extends WC_Payment_Gateway {
 			return false;
 		}
 
-		$subscription_classes = [
-		  'WC_Subscription_Product',
-		  'WC_Product_Subscription',
-		  'WC_Product_Subscription_Variation',
-		];
+		$subscription_classes = array(
+			'WC_Subscription_Product',
+			'WC_Product_Subscription',
+			'WC_Product_Subscription_Variation',
+		);
 
 		foreach ( WC()->cart->get_cart() as $cart_item ) {
 			$product = $cart_item['data'];

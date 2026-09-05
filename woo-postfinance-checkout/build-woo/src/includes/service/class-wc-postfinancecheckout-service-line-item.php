@@ -272,10 +272,10 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	 * Create coupon line item
 	 *
 	 * @param WC_Coupon|WC_Order_Item_Coupon $coupon The coupon object.
-	 * @param float $total_discount_amount The amount of the coupon.
+	 * @param float                          $total_discount_amount The amount of the coupon.
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate|null The line item created or null if the coupon is not valid.
 	 */
-	private function create_coupon_line_items( $coupon, float $total_discount_amount = 0, array $items = [] ) {
+	private function create_coupon_line_items( $coupon, float $total_discount_amount = 0, array $items = array() ) {
 		if ( ! $coupon instanceof WC_Coupon && ! $coupon instanceof WC_Order_Item_Coupon ) {
 			return array();
 		}
@@ -320,13 +320,13 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	 * @return array
 	 */
 	private function calculate_discount_rates_proportionally( array $items, float $total_discount_amount ): array {
-		$tax_totals = [];
+		$tax_totals = array();
 		$total_amount = 0;
 		// If coupon line items are created from session, $items will always be an empty array. If from order, it will have said order line items.
-		$is_created_from_order = ! empty($items);
+		$is_created_from_order = ! empty( $items );
 
 		// Check whether line items are no created from existing order. If not, line items are fetched from cart.
-		if ( ! $is_created_from_order) {
+		if ( ! $is_created_from_order ) {
 			$cart = WC()->cart;
 			$items = $cart->get_cart();
 		}
@@ -339,11 +339,11 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 
 			// If product has no tax rates class set, then create a fake 0 rate one.
 			if ( empty( $tax_rates_class ) ) {
-				$tax_rates_class = [
-					0 => [
+				$tax_rates_class = array(
+					0 => array(
 						'rate' => 0,
-					],
-				];
+					),
+				);
 			}
 
 			foreach ( $tax_rates_class as $rate ) {
@@ -351,39 +351,39 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 				// Line totals are retrieved differently depending on item source here too.
 				$line_total = ! $is_created_from_order ? $item['line_total'] : $item->get_total();
 				$line_tax = ! $is_created_from_order ? $item['line_tax'] : $item->get_total_tax();
-				$line_total_with_tax = floor(($line_total + $line_tax) * 100) / 100;
+				$line_total_with_tax = floor( ( $line_total + $line_tax ) * 100 ) / 100;
 
 				if ( ! isset( $tax_totals[ $rate_id ] ) ) {
-					$tax_totals[ $rate_id ] = [
+					$tax_totals[ $rate_id ] = array(
 						'total' => 0,
 						'rate_percentage' => $rate['rate'],
-					];
+					);
 				}
 
-				$tax_totals[ $rate_id ]['total'] += floor(($line_total_with_tax) * 100) / 100;
+				$tax_totals[ $rate_id ]['total'] += floor( ( $line_total_with_tax ) * 100 ) / 100;
 				$total_amount += $line_total_with_tax;
 			}
 		}
 
 		if ( $total_amount <= 0 ) {
-			return [];
+			return array();
 		}
 
-		$discounts = [];
+		$discounts = array();
 		foreach ( $tax_totals as $rate_id => $data ) {
 			if ( $total_amount == 0 ) {
 				// If $total_amount is 0, no proportional discounts are applied, as there is nothing to distribute.
 				$proportional_discount_amount = 0;
 			} else {
-				$proportional_discount_amount = floor($total_discount_amount * ( $data['total'] / $total_amount ) * 100) / 100;
+				$proportional_discount_amount = floor( $total_discount_amount * ( $data['total'] / $total_amount ) * 100 ) / 100;
 			}
 
 			if ( $proportional_discount_amount > 0 ) {
-				$discounts[] = [
-				  'rate_id' => $rate_id,
-				  'amount' => $proportional_discount_amount,
-				  'rate_percentage' => $data['rate_percentage'],
-				];
+				$discounts[] = array(
+					'rate_id' => $rate_id,
+					'amount' => $proportional_discount_amount,
+					'rate_percentage' => $data['rate_percentage'],
+				);
 			}
 		}
 
@@ -640,8 +640,8 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	/**
 	 * Get items from backend.
 	 *
-	 * @param array $backend_items backend items.
-	 * @param mixed $amount amount.
+	 * @param array    $backend_items backend items.
+	 * @param mixed    $amount amount.
 	 * @param WC_Order $order order.
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
 	 * @throws WC_PostFinanceCheckout_Exception_Invalid_Transaction_Amount WC_PostFinanceCheckout_Exception_Invalid_Transaction_Amount.
@@ -659,7 +659,7 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	/**
 	 * Creates the line items for the products
 	 *
-	 * @param array $backend_items backend items.
+	 * @param array    $backend_items backend items.
 	 * @param WC_Order $order order.
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
 	 * @throws Exception Exception.
@@ -752,7 +752,7 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	/**
 	 * Returns the line items for fees.
 	 *
-	 * @param array $backend_items backend items.
+	 * @param array    $backend_items backend items.
 	 * @param WC_Order $order order.
 	 * @return array
 	 */
@@ -820,7 +820,7 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	/**
 	 * Returns the line items for the shipping costs.
 	 *
-	 * @param array $backend_items backend items.
+	 * @param array    $backend_items backend items.
 	 * @param WC_Order $order order.
 	 * @return array
 	 */
@@ -998,8 +998,8 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	/**
 	 * Returns the line items from the given cart for order renewal.
 	 *
-	 * @param WC_Order $order order.
-	 * @param mixed $order_total Order total.
+	 * @param WC_Order                                                  $order order.
+	 * @param mixed                                                     $order_total Order total.
 	 * @param \PostFinanceCheckout\Sdk\Model\AbstractTransactionPending $transaction Transaction.
 	 *
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
@@ -1022,7 +1022,7 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 
 		$gift_card_items = array();
 
-		$redeemed = WC()->session->get('_wc_gc_giftcards', []);
+		$redeemed = WC()->session->get( '_wc_gc_giftcards', array() );
 
 		if ( empty( $redeemed ) ) {
 			return $gift_card_items;
@@ -1052,7 +1052,7 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 			}
 
 			// Prevent rounding errors from sdk
-			$used_amount = round($used_amount, 2);
+			$used_amount = round( $used_amount, 2 );
 
 			// Create Line Items for gift cards
 			$line_item = new \PostFinanceCheckout\Sdk\Model\LineItemCreate();
@@ -1085,23 +1085,23 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 	 *
 	 * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
 	 */
-	protected function create_gift_card_line_items_from_order( $order) {
+	protected function create_gift_card_line_items_from_order( $order ) {
 		if ( ! function_exists( 'WC_GC' ) ) {
 			return array();
 		}
 
 		$gift_card_items = array();
 
-		//Get array of strings with codes used in current order
+		// Get array of strings with codes used in current order
 		$used_codes = WC_GC()->order->get_gift_cards( $order );
 
 		if ( empty( $used_codes['codes'] ) ) {
 			return $gift_card_items;
 		}
 
-		$order_gift_cards = [];
+		$order_gift_cards = array();
 
-		//Initialize appropriate Gift Card Objects for each code
+		// Initialize appropriate Gift Card Objects for each code
 		foreach ( $used_codes['codes'] as $item ) {
 			$order_gift_cards[] = wc_gc_get_gift_card_by_code( $item );
 		}
@@ -1110,7 +1110,7 @@ class WC_PostFinanceCheckout_Service_Line_Item extends WC_PostFinanceCheckout_Se
 			return $gift_card_items;
 		}
 
-		$items = $order->get_items('gift_card');
+		$items = $order->get_items( 'gift_card' );
 
 		foreach ( $items as $giftcard_item ) {
 

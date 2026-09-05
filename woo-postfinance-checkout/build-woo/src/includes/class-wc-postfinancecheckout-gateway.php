@@ -277,12 +277,12 @@ class WC_PostFinanceCheckout_Gateway extends WC_Payment_Gateway {
 	public function generate_info_html( $key, $data ) {
 		$field_key = $this->get_field_key( $key );
 		$defaults = array(
-			'title' 			=> '',
-			'class' 			=> '',
-			'css' 				=> '',
-			'placeholder' 		=> '',
-			'desc_tip' 			=> true,
-			'description'		=> '',
+			'title'             => '',
+			'class'             => '',
+			'css'               => '',
+			'placeholder'       => '',
+			'desc_tip'          => true,
+			'description'       => '',
 			'custom_attributes' => array(),
 		);
 		$data = wp_parse_args( $data, $defaults );
@@ -564,39 +564,39 @@ class WC_PostFinanceCheckout_Gateway extends WC_Payment_Gateway {
 				$ajax_url = $transaction_service->get_lightbox_url_for_transaction( $transaction );
 			}
 
-            if (get_option( WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_INTEGRATION ) == WC_PostFinanceCheckout_Integration::POSTFINANCECHECKOUT_PAYMENTPAGE) {
-                return false;
+			if ( get_option( WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_INTEGRATION ) == WC_PostFinanceCheckout_Integration::POSTFINANCECHECKOUT_PAYMENTPAGE ) {
+				return false;
 			}
 
 			wp_enqueue_script(
-			  'postfinancecheckout-remote-checkout-js',
-			  $ajax_url,
-			  array(
-				'jquery',
-			  ),
-			  1,
-			  true
+				'postfinancecheckout-remote-checkout-js',
+				$ajax_url,
+				array(
+					'jquery',
+				),
+				1,
+				true
 			);
 			wp_enqueue_script(
-			  'postfinancecheckout-checkout-js',
-			  WooCommerce_PostFinanceCheckout::instance()->plugin_url() . '/assets/js/frontend/checkout.js',
-			  array(
-				'jquery',
-				'jquery-blockui',
-				'postfinancecheckout-remote-checkout-js',
-			  ),
-			  1,
-			  true
+				'postfinancecheckout-checkout-js',
+				WooCommerce_PostFinanceCheckout::instance()->plugin_url() . '/assets/js/frontend/checkout.js',
+				array(
+					'jquery',
+					'jquery-blockui',
+					'postfinancecheckout-remote-checkout-js',
+				),
+				1,
+				true
 			);
 			global $wp_version;
 			$localize = array(
-			  'i18n_not_complete' => esc_html__( 'Please fill out all required fields.', 'woo-postfinancecheckout' ),
-			  'integration' => get_option( WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_INTEGRATION ),
-			  'versions' => array(
-				'wordpress' => $wp_version,
-				'woocommerce' => $woocommerce_data['Version'],
-				'postfinancecheckout' => WC_POSTFINANCECHECKOUT_VERSION,
-			  ),
+				'i18n_not_complete' => esc_html__( 'Please fill out all required fields.', 'woo-postfinancecheckout' ),
+				'integration' => get_option( WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_INTEGRATION ),
+				'versions' => array(
+					'wordpress' => $wp_version,
+					'woocommerce' => $woocommerce_data['Version'],
+					'postfinancecheckout' => WC_POSTFINANCECHECKOUT_VERSION,
+				),
 			);
 			wp_localize_script( 'postfinancecheckout-checkout-js', 'postfinancecheckout_js_params', $localize );
 
@@ -666,7 +666,6 @@ class WC_PostFinanceCheckout_Gateway extends WC_Payment_Gateway {
 
 			[ $result, $transaction ] = $this->process_payment_transaction( $order, $transaction_id, $space_id, $is_order_pay_endpoint, $transaction_service );
 
-
 			$integration_mode = get_option( WooCommerce_PostFinanceCheckout::POSTFINANCECHECKOUT_CK_INTEGRATION );
 
 			$redirect_url = $transaction_service->get_payment_page_url( $transaction->getLinkedSpaceId(), $transaction->getId() );
@@ -716,10 +715,10 @@ class WC_PostFinanceCheckout_Gateway extends WC_Payment_Gateway {
 	 * If the transaction is in a PENDING state, it confirms the transaction and updates the transaction info
 	 * in the order. It also sets up the redirect URL upon successful payment and returns the result and transaction.
 	 *
-	 * @param WC_Order                        $order The WooCommerce order object.
-	 * @param int                             $transaction_id The ID of the transaction.
-	 * @param int                             $space_id The space ID associated with the transaction.
-	 * @param bool                            $is_order_pay_endpoint Flag to determine if the order is being paid for at the order-pay endpoint.
+	 * @param WC_Order                                   $order The WooCommerce order object.
+	 * @param int                                        $transaction_id The ID of the transaction.
+	 * @param int                                        $space_id The space ID associated with the transaction.
+	 * @param bool                                       $is_order_pay_endpoint Flag to determine if the order is being paid for at the order-pay endpoint.
 	 * @param WC_PostFinanceCheckout_Service_Transaction $transaction_service The transaction service instance.
 	 * @return array An array containing the result of the transaction and the transaction object.
 	 *

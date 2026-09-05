@@ -218,8 +218,8 @@ class WC_PostFinanceCheckout_Service_Webhook extends WC_PostFinanceCheckout_Serv
 	/**
 	 * Create a webhook listener.
 	 *
-	 * @param WC_PostFinanceCheckout_Webhook_Entity $entity entity.
-	 * @param int $space_id space id.
+	 * @param WC_PostFinanceCheckout_Webhook_Entity     $entity entity.
+	 * @param int                                       $space_id space id.
 	 * @param \PostFinanceCheckout\Sdk\Model\WebhookUrl $webhook_url webhook url.
 	 *
 	 * @return \PostFinanceCheckout\Sdk\Model\WebhookListenerCreate
@@ -240,7 +240,7 @@ class WC_PostFinanceCheckout_Service_Webhook extends WC_PostFinanceCheckout_Serv
 	/**
 	 * Returns the existing webhook listeners.
 	 *
-	 * @param int $space_id space id.
+	 * @param int                                       $space_id space id.
 	 * @param \PostFinanceCheckout\Sdk\Model\WebhookUrl $webhook_url webhook url.
 	 *
 	 * @return \PostFinanceCheckout\Sdk\Model\WebhookListener[]
